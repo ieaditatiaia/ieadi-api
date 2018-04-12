@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Document(collection="igreja")
 public class Igreja {
@@ -19,12 +21,12 @@ public class Igreja {
 	private LocalDate dataFundacao;
 	private LocalDate dataInauguracao;
 	private boolean status;
-	private LocalDate logradouro;
-	private LocalDate numero;
-	private LocalDate complemento;
-	private LocalDate bairro;
-	private LocalDate cidade;
-	private LocalDate cep;
+	private String logradouro;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String cep;
 	
 	@Id
 	public String getId() {return id;}
@@ -34,11 +36,13 @@ public class Igreja {
 	public String getHierarquia() {return hierarquia;}
 	public void setHierarquia(String hierarquia) {this.hierarquia = hierarquia;}
 	
+	@JsonInclude(Include.NON_NULL)
 	@Size(max=50)
 	@Field("razao_social")
 	public String getRazaoSocial() {return razaoSocial;}
 	public void setRazaoSocial(String razaoSocial) {this.razaoSocial = razaoSocial;}
 	
+	@JsonInclude(Include.NON_NULL) 
 	@Size(max=20)
 	public String getCnpj() {return cnpj;}
 	public void setCnpj(String cnpj) {this.cnpj = cnpj;}
@@ -52,13 +56,13 @@ public class Igreja {
 	public String getFoto() {return foto;}
 	public void setFoto(String foto) {this.foto = foto;}
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-	@Field("data_fundacao")
+	@JsonInclude(Include.NON_NULL) 	
+	@Field("data_fundacao") @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	public LocalDate getDataFundacao() {return dataFundacao;}
 	public void setDataFundacao(LocalDate dataFundacao) {this.dataFundacao = dataFundacao;}
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-	@Field("data_inauguracao")
+	@JsonInclude(Include.NON_NULL) 	
+	@Field("data_inauguracao") @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	public LocalDate getDataInauguracao() {return dataInauguracao;}
 	public void setDataInauguracao(LocalDate dataInauguracao) {this.dataInauguracao = dataInauguracao;}
 	
@@ -66,28 +70,29 @@ public class Igreja {
 	public void setStatus(boolean status) {this.status = status;}
 	
 	@Size(max=50)
-	public LocalDate getLogradouro() {return logradouro;}
-	public void setLogradouro(LocalDate logradouro) {this.logradouro = logradouro;}
+	public String getLogradouro() {return logradouro;}
+	public void setLogradouro(String logradouro) {this.logradouro = logradouro;}
 	
 	@Size(max=10)
-	public LocalDate getNumero() {return numero;}
-	public void setNumero(LocalDate numero) {this.numero = numero;}
+	public String getNumero() {return numero;}
+	public void setNumero(String numero) {this.numero = numero;}
+	
+	@JsonInclude(Include.NON_NULL)
+	@Size(max=30)
+	public String getComplemento() {return complemento;}
+	public void setComplemento(String complemento) {this.complemento = complemento;}
 	
 	@Size(max=30)
-	public LocalDate getComplemento() {return complemento;}
-	public void setComplemento(LocalDate complemento) {this.complemento = complemento;}
+	public String getBairro() {return bairro;}
+	public void setBairro(String bairro) {this.bairro = bairro;}
 	
 	@Size(max=30)
-	public LocalDate getBairro() {return bairro;}
-	public void setBairro(LocalDate bairro) {this.bairro = bairro;}
-	
-	@Size(max=30)
-	public LocalDate getCidade() {return cidade;}
-	public void setCidade(LocalDate cidade) {this.cidade = cidade;}
+	public String getCidade() {return cidade;}
+	public void setCidade(String cidade) {this.cidade = cidade;}
 	
 	@Size(max=10)
-	public LocalDate getCep() {return cep;}
-	public void setCep(LocalDate cep) {this.cep = cep;}
+	public String getCep() {return cep;}
+	public void setCep(String cep) {this.cep = cep;}
 	
 	@Override
 	public int hashCode() {

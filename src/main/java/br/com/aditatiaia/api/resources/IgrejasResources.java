@@ -3,6 +3,7 @@ package br.com.aditatiaia.api.resources;
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class IgrejasResources {
 	private IgrejasServices igrejasServices;
 	
 	@PostMapping
-	public ResponseEntity<Void> salvar(@RequestBody Igreja igreja) {
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Igreja igreja) {
 		igreja = igrejasServices.salvar(igreja);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(igreja.getId()).toUri();
 		return ResponseEntity.created(uri).build();		
