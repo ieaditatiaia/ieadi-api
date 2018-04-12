@@ -1,8 +1,11 @@
 package br.com.aditatiaia.api.domain;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,6 +30,8 @@ public class Igreja {
 	private String bairro;
 	private String cidade;
 	private String cep;
+	@DBRef
+	private List<HistoricoIgreja> historicos;
 	
 	@Id
 	public String getId() {return id;}
@@ -93,6 +98,10 @@ public class Igreja {
 	@Size(max=10)
 	public String getCep() {return cep;}
 	public void setCep(String cep) {this.cep = cep;}
+	
+	@JsonInclude(Include.NON_NULL)	
+	public List<HistoricoIgreja> getHistoricos() {return historicos;}
+	public void setHistoricos(List<HistoricoIgreja> historicos) {this.historicos = historicos;}
 	
 	@Override
 	public int hashCode() {
