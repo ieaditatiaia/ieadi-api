@@ -2,11 +2,9 @@ package br.com.aditatiaia.api.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(collection="agenda")
